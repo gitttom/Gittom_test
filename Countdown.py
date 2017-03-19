@@ -1,30 +1,30 @@
 import sys
 
 
-def recurse(thirdList: list, myTarget: int, myoperator: str = None, difference: int = None) -> object:
+def recurse(thirdList: list, myTarget: int, myoperator: str = None) -> None:
+    global closestanswer
     if (myoperator == None):
         for operator in operators:
             recurse(thirdList, myTarget, operator)
         return
-    if (difference == None):
-        difference = myTarget
 
     newValue = "(" + str(thirdList[0]) + myoperator + str(thirdList[1]) + ")"
     fourthList = thirdList.copy()
     del fourthList[0]
     fourthList[0] = newValue
     if len(fourthList) > 1:
-        recurse(fourthList, myTarget, None, difference)
+        recurse(fourthList, myTarget, None)
     else:
         answer = eval(fourthList[0])
-        newdifference = abs(answer - myTarget)
-        if newdifference < difference:
-            difference = newdifference
-            print("** " + str(answer))
+
+        if abs(myTarget - answer) < abs(myTarget - closestanswer):
+            print (answer)
+            closestanswer = answer
+            return
         if (answer == myTarget):
             print("")
-            print(fourthList, end="")
-            print("           = " + str(answer))
+            print(fourthList[0], end="")
+            print(" = " + str(answer))
             exit(0)
 
 
@@ -86,7 +86,7 @@ def main():
     print("Solution not found.")
     exit(0)
 
-
+closestanswer = 0
 operators = ["+", "-", "*", "/", "*0+"]
 if __name__ == '__main__':
     main()
