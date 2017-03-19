@@ -1,4 +1,31 @@
 import sys
+from PyQt4 import QtGui
+
+def window():
+   app = QtGui.QApplication(sys.argv)
+   w = QtGui.QWidget()
+   b = QtGui.QLabel(w)
+   b.setText("Hello World!")
+   w.setGeometry(100,100,200,50)
+   b.move(50,20)
+   w.setWindowTitle("PyQt")
+   w.show()
+   sys.exit(app.exec_())
+
+class Employee:
+    'Common base class for all employees'
+    empCount = 0
+
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+        Employee.empCount += 1
+
+    def displayCount(self):
+        print ("Total Employee %d" % Employee.empCount)
+
+    def displayEmployee(self):
+        print ("Name : ", self.name, ", Salary: ", self.salary)
 
 
 def recurse(thirdList: list, myTarget: int, myoperator: str = None) -> None:
@@ -68,6 +95,15 @@ def calc(myList, myTarget):
 
 def main():
     print("Welcome to countdown!")
+
+    "This would create first object of Employee class"
+    emp1 = Employee("Zara", 2000)
+    "This would create second object of Employee class"
+    emp2 = Employee("Manni", 5000)
+    emp1.displayEmployee()
+    emp2.displayEmployee()
+    print ("Total Employee %d" % Employee.empCount)
+
     myList = [0, 0, 0, 0, 0, 0]
     myTarget = 0
     i = 0
@@ -90,3 +126,9 @@ closestanswer = 0
 operators = ["+", "-", "*", "/", "*0+"]
 if __name__ == '__main__':
     main()
+
+
+
+
+app = ExampleApp(tk.Tk())
+app.run()
